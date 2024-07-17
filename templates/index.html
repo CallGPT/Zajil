@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block content %}
+            <!-- Dashboard cards -->
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-blue-500 text-white p-6 rounded-lg shadow-lg flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold">Total Orders</h3>
+                            <p class="text-2xl">{{ ordersCount }}</p>
+                        </div>
+                        <i class="fas fa-shopping-cart text-3xl opacity-50"></i>
+                    </div>
+                    <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold">Total Calls</h3>
+                            <p class="text-2xl">{{ chatids }}</p>
+                        </div>
+                        <i class="fas fa-phone text-3xl opacity-50"></i>
+                    </div>
+                    <div class="bg-yellow-500 text-white p-6 rounded-lg shadow-lg flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold">Total Products</h3>
+                            <p class="text-2xl">{{productsCount}}</p>
+                        </div>
+                        <i class="fas fa-box text-3xl opacity-50"></i>
+                    </div>
+                    <div class="bg-red-500 text-white p-6 rounded-lg shadow-lg flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold">Total Tokens</h3>
+                            <p class="text-2xl">{{ tokens }}</p>
+                        </div>
+                        <i class="fas fa-ticket-alt text-3xl opacity-50"></i>
+                    </div>
+                </div>
+
+                <!-- Orders Table -->
+                <div class="mt-6 bg-white rounded-lg shadow-lg">
+                    <div class="bg-blue-500 text-white p-4 rounded-t-lg">
+                        <h3 class="text-lg font-semibold">Orders Table</h3>
+                    </div>
+                    <div class="p-4">
+                        <table class="min-w-full bg-white">
+                            <thead>
+                                <tr class="w-full bg-gray-100 border-b">
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">#</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Order</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Location</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Price</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in allOrders %}
+                                <tr class="hover:bg-gray-100 transition-colors">
+                                    <td class="py-3 px-4">{{ order.id }}</td>
+                                    <td class="py-3 px-4">{{ order.order }}</td>
+                                    <td class="py-3 px-4">{{ order.location }}</td>
+                                    <td class="py-3 px-4">{{ order.price }}</td>
+                                    <td class="py-3 px-4">{{ order.status }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

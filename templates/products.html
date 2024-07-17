@@ -1,0 +1,157 @@
+<!-- link base.html -->
+{% extends 'base.html' %} {% block content %} 
+                  <!-- Product List and Add Button -->
+                  <div class="p-6">
+                        <div class="flex justify-between items-center mb-6">
+                              <h2 class="text-2xl font-bold">Available Products</h2>
+                              <button id="addProductButton"
+                                    class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">Add
+                                    Product</button>
+                        </div>
+
+                        <!-- Products Table -->
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                              <div class="bg-blue-500 text-white p-4 rounded-t-lg">
+                                    <h3 class="text-lg font-semibold">Products Table</h3>
+                              </div>
+                              <div class="p-4 overflow-x-auto">
+                                    <table class="min-w-full bg-white">
+                                          <thead>
+                                                <tr class="w-full bg-gray-100 border-b">
+                                                      <th class="text-left py-3 px-4 uppercase font-semibold text-sm">#
+                                                      </th>
+                                                      <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                                            Name</th>
+                                                      <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                                            Price</th>
+                                                      <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                                            Ingredients</th>
+                                                      <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                                            Category</th>
+                                                      <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                                            Stock</th>
+                                                      <th class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                                            Edit</th>
+                                                </tr>
+                                          </thead>
+                                          <tbody>
+                                                {% for product in allProducts %}
+                                                <tr class="hover:bg-gray-100 transition-colors">
+                                                      <td class="py-3 px-4">{{ product.id }}</td>
+                                                      <td class="py-3 px-4">{{ product.name }}</td>
+                                                      <td class="py-3 px-4">{{ product.price }}</td>
+                                                      <td class="py-3 px-4">{{ product.ingredients }}</td>
+                                                      <td class="py-3 px-4">{{ product.category }}</td>
+                                                      <td class="py-3 px-4">{{ product.stock }}</td>
+                                                      <td class="py-3 px-4">
+                                                            <button
+                                                                  class="editButton py-1 px-3 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                                                  data-id="{{ product.id }}"
+                                                                  data-name="{{ product.name }}"
+                                                                  data-price="{{ product.price }}"
+                                                                  data-ingredients="{{ product.ingredients }}"
+                                                                  data-category="{{ product.category }}"
+                                                                  data-stock="{{ product.stock }}">
+                                                            <i class="fas fa-edit"></i>
+                                                            </button>
+                                                      </td>
+                                                </tr>
+                                                {% endfor %}
+                                          </tbody>
+                                    </table>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+      <!-- Add Product Modal -->
+      <div id="addProductModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg" style="width: 40%;">
+                  <h2 class="text-2xl font-bold mb-4">Add New Product</h2>
+                  <form action="/add_product" method="POST">
+                        <div class="mb-4">
+                              <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
+                              <input class="form-input w-full border rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    type="text" name="name" id="name" required>
+                        </div>
+                        <div class="mb-4">
+                              <label class="block text-gray-700 text-sm font-bold mb-2" for="price">Price</label>
+                              <input class="form-input w-full border rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    type="text" name="price" id="price" required>
+                        </div>
+                        <div class="mb-4">
+                              <label class="block text-gray-700 text-sm font-bold mb-2"
+                                    for="ingredients">Ingredients</label>
+                              <input class="form-input w-full border rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    type="text" name="ingredients" id="ingredients" required>
+                        </div>
+                        <div class="mb-4">
+                              <label class="block text-gray-700 text-sm font-bold mb-2" for="category">Category</label>
+                              <input class="form-input w-full border rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    type="text" name="category" id="category" required>
+                        </div>
+                        <div class="mb-4">
+                              <label class="block text-gray-700 text-sm font-bold mb-2" for="stock">Stock</label>
+                              <input class="form-input w-full border rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    type="text" name="stock" id="stock" required>
+                        </div>
+
+                        <div class="flex justify-end">
+                              <button type="button" id="closeEditModalButton"
+                                    class="py-2 px-4 bg-gray-500 text-white rounded mr-2 hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500">Cancel</button>
+                              <button type="submit"
+                                    class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">Save
+                                    Changes</button>
+                        </div>
+                  </form>
+            </div>
+      </div>
+
+      
+      <script>
+            // Modal handling
+            const addProductButton = document.getElementById('addProductButton');
+            const addProductModal = document.getElementById('addProductModal');
+            const closeModalButton = document.getElementById('closeModalButton');
+            const editModals = document.querySelectorAll('.editButton');
+            const editProductModal = document.getElementById('editProductModal');
+            const closeEditModalButton = document.getElementById('closeEditModalButton');
+            const editProductForm = document.getElementById('editProductForm');
+
+            addProductButton.addEventListener('click', () => {
+                  addProductModal.classList.remove('hidden');
+            });
+
+            closeModalButton.addEventListener('click', () => {
+                  addProductModal.classList.add('hidden');
+            });
+
+            // Open edit modal and populate with product data
+            editModals.forEach(button => {
+                  button.addEventListener('click', () => {
+                        const productId = button.getAttribute('data-id');
+                        const productName = button.getAttribute('data-name');
+                        const productPrice = button.getAttribute('data-price');
+                        const productIngredients = button.getAttribute('data-ingredients');
+                        const productCategory = button.getAttribute('data-category');
+                        const productStock = button.getAttribute('data-stock');
+
+                        document.getElementById('editProductId').value = productId;
+                        document.getElementById('editName').value = productName;
+                        document.getElementById('editPrice').value = productPrice;
+                        document.getElementById('editIngredients').value = productIngredients;
+                        document.getElementById('editCategory').value = productCategory;
+                        document.getElementById('editStock').value = productStock;
+
+                        editProductModal.classList.remove('hidden');
+                  });
+            });
+
+            closeEditModalButton.addEventListener('click', () => {
+                  editProductModal.classList.add('hidden');
+            });
+
+            // You may add form submission handling for editing the product in editProductForm submit event listener
+      </script>
+{% endblock %}

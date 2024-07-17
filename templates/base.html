@@ -1,0 +1,66 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Product Dashboard</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+      <script src="https://cdn.tailwindcss.com/"></script>
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 font-sans">
+      <div class="flex">
+            <!-- Sidebar -->
+            <div class="w-64 bg-gray-800 text-white fixed inset-y-0 flex flex-col shadow-lg">
+                  <div class="py-6 text-center text-2xl font-bold border-b border-gray-700">Dashboard</div>
+                  <nav class="flex-grow">
+                        <a href="/admin/" class="block py-3 px-4 hover:bg-gray-700 transition-colors"><i
+                                    class="fas fa-home mr-2"></i> Home</a>
+                        <a href="/admin/calls" class="block py-3 px-4 hover:bg-gray-700 transition-colors"><i
+                                    class="fas fa-phone-alt mr-2"></i> Calls</a>
+                        <a href="/admin/products" class="block py-3 px-4 hover:bg-gray-700  transition-colors"><i
+                                    class="fas fa-box-open mr-2"></i> Products</a>
+                        <a href="#" class="block py-3 px-4 hover:bg-gray-700 transition-colors"><i
+                                    class="fas fa-ticket-alt mr-2"></i> Tokens</a>
+                        <a href="#" class="block py-3 px-4 hover:bg-gray-700 transition-colors"><i
+                                    class="fas fa-cogs mr-2"></i> Settings</a>
+                  </nav>
+                  <a href="#"
+                        class="block py-3 px-4 hover:bg-gray-700 transition-colors mt-auto border-t border-gray-700"><i
+                              class="fas fa-sign-out-alt mr-2"></i> Logout</a>
+            </div>
+
+            <!-- Main content -->
+            <div class="flex-grow ml-64">
+                  <!-- Navbar -->
+                  <nav class="bg-white shadow-md p-4 flex justify-between items-center sticky top-0 z-10">
+                        <div class="flex items-center">
+                              <a class="text-2xl font-bold" href="#">
+                                    <img src="https://l.top4top.io/p_3110mmrw61.png" width="150px" alt="Logo">
+                              </a>
+                        </div>
+                        <form class="flex flex-grow justify-center mx-4">
+                              <input class="form-input w-1/2 border rounded-l py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    type="search" placeholder="Search" aria-label="Search">
+                              <button
+                                    class="py-2 px-4 bg-green-500 text-white rounded-r hover:bg-green-600 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    type="submit">Search</button>
+                        </form>
+                        <div class="flex items-center">
+                              <span class="text-lg mr-4">Super Admin</span>
+                              <img src="https://avatar.iran.liara.run/username?username=Scott+Wilson"
+                                    class="w-10 h-10 rounded-full" alt="Admin Image">
+                        </div>
+                  </nav>
+
+                  {% block content %}{% endblock %}
+
+
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.5.2/cdn.min.js" defer></script>
+
+</body>
+
+</html>
