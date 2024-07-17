@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify, send_file, Blueprint, render_template,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
-import os
-import random
-from models.askAi import chat_with_ai
 from models.generatVoice import generatVoice
+from models.askAi import chat_with_ai
+from models.calculate_tokens import calculate_tokens
+from flask_migrate import Migrate
+from flask_cors import CORS
+import random
+import os
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -15,6 +17,8 @@ app.config['API_URL'] = 'https://api.call-gpt.tech'
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'audio')
 
 db = SQLAlchemy(app)
+# migrate 
+migrate = Migrate(app, db)
 
 admin = Blueprint('admin', __name__)
 
@@ -45,7 +49,10 @@ class Product(db.Model):
     category = db.Column(db.String(100), nullable=False)
     stock = db.Column(db.String(100), nullable=False)
     create_at = db.Column(db.DateTime, server_default=db.func.now())
-
+class Tockens(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    token = db.Column(db.String(100), nullable=False)
+    create_at = db.Column(db.DateTime, server_default=db.func.now())
 def generate_random_id():
     return str(random.randint(1000000000, 9999999999))
 
@@ -68,12 +75,15 @@ def process_chat(chat_id, text, language, is_voice=False,prodeucts=None):
     text = text.replace(" اجب بتلخيص لا باستفاضة اقل من 3 جمل", "").replace("Answer in a summary not in detail less than 3 sentences", "")
     new_chat_user = Chat(chat_id=chat_id, role="user", content=text, language=language)
     new_chat_ai = Chat(chat_id=chat_id, role="system", content=response, is_voice=is_voice, voice=generate_random_id() if is_voice else None, language=language)
-    
+    # add total tockens to db "ask & answer"
+    new_tocken = calculate_tokens(text=text) + calculate_tokens(text=response)
+    new_tocken = Tockens(token=new_tocken)
+    db.session.add(new_tocken)
     db.session.add(new_chat_user)
     db.session.add(new_chat_ai)
-    db.session.commit()
-    
+    db.session.commit()   
     return response, new_chat_ai.voice if is_voice else None
+
 def make_menu():
     products = Product.query.all()
     menu = ""
@@ -112,7 +122,7 @@ def chat(chat_id):
     
     return jsonify({"response": response})
 
-@app.route('/api/v1/order/history/<chat_id>', methods=['GET'])
+@app.route('/api/v1/order/history/<chat_id>', methods=['GET'])    
 def history(chat_id):
     chat_history = get_chat_history(chat_id)
     
@@ -167,7 +177,11 @@ def admin_index():
     chatids = db.session.query(Chat.chat_id).distinct().count()
     messages = Chat.query.count()
     productsCount = Product.query.count()
-    return render_template("index.html", allOrders=allOrders, ordersCount=ordersCount, chatids=chatids, tokens=messages, productsCount=productsCount)
+    totalTockens = Tockens.query.all()
+    totalTockensCount = 0
+    for tocken in totalTockens:
+        totalTockensCount += int(tocken.token)
+    return render_template("index.html", allOrders=allOrders, ordersCount=ordersCount, chatids=chatids, tokens=totalTockensCount, productsCount=productsCount)
 @admin.route("/calls")
 def calls():
     allCalls = Chat.query.all()

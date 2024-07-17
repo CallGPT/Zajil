@@ -1,0 +1,397 @@
+/* Remove Chrome Input Field's Unwanted Yellow Background Color */
+input:-webkit-autofill, 
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+::-webkit-input-placeholder { / Chrome/Opera/Safari /
+  color: #000 !important;
+}
+::-moz-placeholder { / Firefox 19+ /
+  color: #000 !important;
+}
+::-ms-input-placeholder { / IE 10+ /
+  color: #000 !important;
+}
+::-moz-placeholder { / Firefox 18- /
+  color: #000 !important;
+}
+
+
+/* Jquery ui select css */
+.ui-selectmenu-open .ui-widget-content {
+    border: 1px solid #3452ff !important;
+    background: #ffffff !important;
+    color: #999 !important;
+    border-radius: 0 !important;
+}
+
+/* Jquery ui select hover bg css */
+.ui-selectmenu-open .ui-widget-content .ui-state-focus {
+    border: 1px solid #3452ff !important;
+    background: #3452ff !important;
+    font-weight: normal !important;
+    color: #fff !important;
+    font-size: 14px !important;
+}
+
+/* Jquery ui select hover some change css */
+.ui-selectmenu-open .ui-menu .ui-menu-item {
+    border: 1px solid transparent !important;
+    position: relative !important;
+    margin: 0;
+    padding: 5px 15px !important;
+    cursor: pointer !important;
+    font-size: 13px !important;
+    text-transform: none !important;
+}
+.ui-selectmenu-menu .ui-menu {
+    padding-bottom: 0px !important;
+}
+
+
+/*** 
+=============================================
+    Single Service style
+=============================================
+***/
+#single-service-area .ui-state-default {
+    width: 100% !important;
+    border-radius: 0 !important;
+    border: 1px solid #ececec !important;
+    background: #f9f9f9 !important;
+    color: #aeb0c4 !important;
+    font-size: 14px !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 400 !important;
+    text-transform: capitalize;
+}
+#single-service-area .consultation-form .ui-selectmenu-button {
+    height: 50px !important;
+    position: relative;
+    transition: all 500ms ease !important;
+}
+#single-service-area .consultation-form .ui-selectmenu-button:focus{
+    outline: none;
+    border: 1px solid #3452ff;
+}
+#single-service-area .consultation-form .ui-selectmenu-button span.ui-selectmenu-text {
+    display: block;
+    line-height: 18px;
+    overflow: hidden;
+    text-align: left;
+    padding: 12px 15px 14px;
+}
+/* arrow button css */
+#single-service-area .consultation-form .ui-selectmenu-button span.ui-icon {
+    display: block;
+    float: right;
+    height: 45px;
+    position: absolute;
+    text-indent: 0;
+    top: 7px;
+    width: 45px;
+    right: 0;
+    bottom: 0;
+}
+#single-service-area .consultation-form .ui-selectmenu-button span.ui-icon::before {
+  color: #cbd5dc;
+  content: "\f107";
+  font-family: FontAwesome;
+  font-size: 20px;
+  overflow: visible;
+  position: absolute;
+  right: 14px;
+  top: 12px;
+}
+
+
+
+/*** 
+=============================================
+    Shop area style
+=============================================
+***/
+/* Main field css css */
+.shop-area .showing-result-shorting .ui-selectmenu-button {
+    background: #fff !important;
+    width: 230px !important;
+    border-radius: 0px !important;
+    border: 1px solid #ddd !important;
+    color: #333 !important;
+    font-size: 13px !important;
+    text-transform: capitalize;
+    height: 40px !important;
+    position: relative;
+    transition: all 500ms ease;
+}
+.shop-area .showing-result-shorting .ui-selectmenu-button:focus{
+    outline: none;
+}
+.shop-area .showing-result-shorting .ui-selectmenu-button span.ui-selectmenu-text {
+    display: block;
+    line-height: 18px;
+    overflow: hidden;
+    text-align: left;
+    padding: 10px 15px 10px;
+    transition: all 500ms ease;
+}
+/* arrow button css */
+.shop-area .showing-result-shorting .ui-selectmenu-button span.ui-icon {
+    display: block;
+    float: right;
+    height: 40px;
+    position: absolute;
+    text-indent: 0;
+    top: 7px;
+    width: 40px;
+    right: 0;
+    bottom: 0;
+}
+.shop-area .showing-result-shorting .ui-selectmenu-button span.ui-icon::before {
+  color: #333;
+  content: "\f107";
+  font-family: FontAwesome;
+  font-size: 17px;
+  overflow: visible;
+  position: absolute;
+  right: 14px;
+  top: 7px;
+}
+
+
+
+
+
+
+
+
+
+#contact-form input[type="text"].error{
+  border-color: red;
+}
+#contact-form input[type="email"].error{
+  border-color: red;
+}
+#contact-form select.error {
+  border-color: red;
+}
+#contact-form textarea.error{
+  border-color: red;
+}
+#contact-form label.error {
+  display: none !important;
+}
+
+
+#faq-form input[type="text"].error{
+  border-color: red !important;
+}
+#faq-form input[type="email"].error{
+  border-color: red !important;
+}
+#faq-form select.error {
+  border-color: red !important;
+}
+#faq-form textarea.error{
+  border-color: red !important;
+}
+#faq-form label.error {
+  display: none !important;
+}
+
+
+#add-comment-form input[type="text"].error{
+  border-color: red;    
+}
+#add-comment-form input[type="email"].error{
+  border-color: red;    
+}
+#add-comment-form select.error {
+  border-color: red;
+}
+#add-comment-form textarea.error{
+  border-color: red;    
+}
+#add-comment-form label.error {
+  display: none !important;
+}
+
+
+#consultation-form input[type="text"].error{
+  border-color: red;    
+}
+#consultation-form input[type="email"].error{
+  border-color: red;    
+}
+#consultation-form select.error {
+  border-color: red;
+}
+#consultation-form textarea.error{
+  border-color: red;    
+}
+#consultation-form label.error {
+  display: none !important;
+}
+
+
+
+#review-form input[type="text"].error{
+  border-color: red;    
+}
+#review-form input[type="email"].error{
+  border-color: red;    
+}
+#review-form select.error {
+  border-color: red;
+}
+#review-form textarea.error{
+  border-color: red;    
+}
+#review-form label.error {
+  display: none !important;
+}
+
+
+/*________________Html 5 lightbox css_____ */
+#html5-watermark {
+    background: #ff2b58;
+    display: none !important;
+    z-index: 9999999999;
+}
+
+
+
+/*** 
+=============================================
+    Rev Slider Wrapper style
+=============================================
+***/
+.rev_slider_wrapper .slide-content-box .button a{
+  transition: all 0.5s ease 0s !important;
+}
+
+
+
+/*** 
+=============================================
+    Brand Area style
+=============================================
+***/
+.brand-area .brand .single-item img {
+    display: inline-block;
+    max-width: 100% !important;
+    opacity: 1;
+    padding: 0px 0;
+    position: relative;
+    -webkit-transition: all 300ms ease-in 0s;
+    transition: all 300ms ease-in 0s;
+    width: auto !important;
+}
+
+
+
+/*** 
+=============================================
+    Cart Area style
+=============================================
+***/
+.cart-area .cart-table tbody tr .qty .form-control {
+  background-color: #f7f7f7;
+  background-image: none;
+  border: 1px solid #f7f7f7;
+  border-radius: 0 !important;
+  box-shadow: none;
+  color: #222222;
+  display: block;
+  font-size: 18px;
+  font-weight: 400;
+  height: 45px;
+  padding: 6px 0;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+.cart-bottom .calculate-shipping .ui-state-default {
+    background: #fff !important;
+    border: 2px solid #f7f7f7 !important;
+    border-radius: 0 !important;
+    color: #999999 !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    height: 45px !important;
+    margin-bottom: 17px !important;
+    outline: medium none !important;
+    width: 100% !important;
+    position: relative !important;;
+}
+
+
+.single-shop-content .content-box .addto-cart-box .form-control {
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #eaeaea;
+  border-radius: 0 !important;
+  box-shadow: none;
+  color: #272727;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  height: 50px;
+  padding: 6px 0 8px;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+.bootstrap-select {
+    width: 100% !important;
+}
+.bootstrap-select > .dropdown-toggle {
+    background: #252525 none repeat scroll 0 0;
+    border-radius: 0;
+    color: #6d6d6d;
+    cursor: pointer;
+    height: 45px;
+    transition: all 500ms ease 0s;
+    z-index: 1;
+    border: 1px solid #2f2f2f;
+}
+.dropdown-menu {
+    background-color: #fff !important;
+    border: 0px solid #888 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    display: none;
+    font-size: 14px;
+    margin: 1px 0 0 !important;
+    width: 100%;
+    display: block;
+    padding: 8px 12px !important;
+}
+.bootstrap-select.btn-group .dropdown-menu li {}
+.bootstrap-select.btn-group .dropdown-menu li a {
+    padding: 8px 10px !important;
+}
+
+.default-form .bootstrap-select {
+    border: 1px solid #2f2f2f;
+    background: #252525;
+    color: #ababab;
+    padding: 5px 0;
+    font-size: 16px;
+}
+.bootstrap-select>.dropdown-toggle:focus,
+.bootstrap-select>.dropdown-toggle:hover {
+    color: #ababab;
+    background: #444;
+}
+
+
+
