@@ -165,6 +165,17 @@ def get_voice_file(voice_id):
     if os.path.exists(file_path):
         return send_file(file_path, mimetype='audio/mpeg')
     return jsonify({"error": "File not found"}), 404
+@app.route('/api/v1/get_all_orders', methods=['GET'])
+def get_all_orders():
+    phone = request.headers.get('phone')
+    orders = Order.query.filter_by(user_phone=phone).all()
+    orders = [{"order": order.order, "status": order.status, "price": order.price, "location": order.location} for order in orders]
+    return jsonify({"orders": orders})
+@app.route('/api/v1/get_all_products', methods=['GET'])
+def get_all_products():
+    products = Product.query.all()
+    products = [{"name": product.name, "price": product.price, "ingredients": product.ingredients, "category": product.category, "stock": product.stock} for product in products]
+    return jsonify({"products": products})
 
 @app.route('/add_product', methods=['POST'])
 def add_product():

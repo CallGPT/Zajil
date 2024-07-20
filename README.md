@@ -1,43 +1,115 @@
 
-# مشروع FoodPhone 🌟
+# Zajil API Documentation 🌟
 
-## مقدمة 🎉
-## URL 
+## Introduction 🎉
+Welcome to the Zajil API documentation! This project, built with Flask, enables voice and text order management, chat history retrieval, and invoice generation. Below are the available API endpoints:
+
+**Base URL:** 
 ```
 https://api.call-gpt.tech
 ```
 
-ده مشروع مكتوب بـ Flask عشان تسجل الأوامر الصوتية والكتابية، وتطلع الفواتير وتاريخ المحادثات. فيه نهايات API متعددة:
-1. `/api/v1/order/voice/<chatId>` - لتحويل النص لصوت
-2. `/api/v1/order/chat/<chatId>` - للدردشة
-3. `/api/v1/order/history/<chatId>` - لعرض تاريخ الدردشة
-4. `/api/v1/order/close/<chatId>` - لغلق الطلب وتوليد الفاتورة
+## Endpoints 📝
 
- 
-## الشرح 📝
+### 1. Convert Text to Voice 📋
+To convert text to voice, send a POST request to `/api/v1/order/voice/<chat_id>` with a JSON payload containing the `text`. AI will generate a response and produce a corresponding audio file.
 
-### 1. تحويل النص لصوت 📋
-لما حد عايز يحول نص لصوت، هيبعت طلب POST لـ `/api/v1/order/voice/<chatId>` ومعاه JSON فيه `text`. هنستخدم AI عشان نرد على النص، وهنولد صوت للرد.
-
-- البيانات اللي تبعتها لازم تكون زي كده:
+- **Request Format:**
   ```json
   {
-    "text": "النص هنا"
+    "text": "Your text here"
   }
   ```
 
-### 2. الدردشة 🔐
-لما حد عايز يدردش، هيبعت طلب POST لـ `/api/v1/order/chat/<chatId>` ومعاه JSON فيه `text`. هنستخدم AI عشان نرد على النص ونسجل الدردشة في قاعدة البيانات.
-
-- البيانات اللي تبعتها لازم تكون زي كده:
+- **Response:**
   ```json
   {
-    "text": "النص هنا"
+    "voiceLink": "https://api.call-gpt.tech/api/v1/voice/<voice_id>"
   }
   ```
 
-### 3. عرض تاريخ الدردشة ♻️
-لما حد عايز يشوف تاريخ الدردشة، هيبعت طلب GET لـ `/api/v1/order/history/<chatId>`. هنرجع كل الرسائل اللي اتسجلت في الدردشة دي.
+### 2. Chat 🔐
+To start a chat session, send a POST request to `/api/v1/order/chat/<chat_id>` with a JSON payload containing the `text`. The AI will respond, and the chat history will be recorded in the database.
 
-### 4. غلق الطلب وتوليد الفاتورة ✅
-لما حد عايز يغلق الطلب ويولد فاتورة، هيبعت طلب GET لـ `/api/v1/order/close/<chatId>`. هنستخدم AI عشان نلخص الطلب ونحفظه كفاتورة.
+- **Request Format:**
+  ```json
+  {
+    "text": "Your text here"
+  }
+  ```
+
+- **Response:**
+  ```json
+  {
+    "response": "AI's response here"
+  }
+  ```
+
+### 3. View Chat History ♻️
+To retrieve the chat history for a given `chat_id`, send a GET request to `/api/v1/order/history/<chat_id>`. It returns all recorded messages in the chat.
+
+- **Response:**
+  ```json
+  {
+    "chat_history": [
+      {
+        "role": "user",
+        "content": "Message content here"
+      },
+      {
+        "role": "system",
+        "content": "AI response here"
+      }
+    ]
+  }
+  ```
+
+### 4. Close Order and Generate Invoice ✅
+To close an order and generate an invoice, send a GET request to `/api/v1/order/close/<chat_id>`. AI will summarize the order details, and an invoice will be created.
+
+- **Response:**
+  ```json
+  {
+    "response": "Order closed successfully"
+  }
+  ```
+
+### 5. Get All Orders 📑
+To retrieve all orders for a specific user, send a GET request to `/api/v1/get_all_orders`. Include the user's phone number in the request headers.
+
+- **Request Header:**
+  ```
+  phone: User's phone number
+  ```
+
+- **Response:**
+  ```json
+  {
+    "orders": [
+      {
+        "order": "Order details here",
+        "status": "Order status",
+        "price": "Order price",
+        "location": "Order location"
+      }
+    ]
+  }
+  ```
+
+### 6. Get All Products 🛒
+To retrieve all products available, send a GET request to `/api/v1/get_all_products`.
+
+- **Response:**
+  ```json
+  {
+    "products": [
+      {
+        "name": "Product name",
+        "price": "Product price",
+        "ingredients": "Product ingredients",
+        "category": "Product category",
+        "stock": "Product stock"
+      }
+    ]
+  }
+  ```
