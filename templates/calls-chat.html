@@ -1,0 +1,48 @@
+<!-- call-chat.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto p-6">
+      <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="order-details mb-6">
+                  <h2 class="text-2xl font-semibold mb-4">Order Details</h2>
+                  {% if order %}
+                  <div class="p-4 bg-gray-100 rounded-lg">
+                        <p><strong>Order ID:</strong> {{ order.id }}</p>
+                        <p><strong>Order:</strong> {{ order.order }}</p>
+                        <p><strong>Status:</strong> {{ order.status }}</p>
+                        <p><strong>Location:</strong> {{ order.location }}</p>
+                        <p><strong>Price:</strong> {{ order.price }}</p>
+                        <p><strong>User Phone:</strong> {{ order.user_phone }}</p>
+                        <p><strong>Created At:</strong> {{ order.create_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                  </div>
+                  {% else %}
+                  <p class="text-red-500">No order found for this chat.</p>
+                  {% endif %}
+            </div>
+            <h1 class="text-3xl font-bold mb-6 text-center">Chat History</h1>
+
+
+            <div class="chat-history overflow-y-auto  p-4 bg-gray-50 rounded-lg" style="height: 30%;">
+                  {% for chat in chatHistory %}
+                  <div class="flex my-3 {% if chat.role == 'user' %} justify-end {% endif %}">
+                        <div class="flex flex-col max-w-xs p-3 rounded-lg 
+                            {% if chat.role == 'user' %} bg-blue-100 text-right {% else %} bg-gray-200 {% endif %}">
+                              <div class="flex items-center mb-1">
+                                    <i
+                                          class="{% if chat.role == 'user' %} fas fa-user text-blue-600 {% else %} fas fa-robot text-gray-600 {% endif %} mr-2"></i>
+                                    <strong
+                                          class="text-sm {% if chat.role == 'user' %} text-blue-700 {% else %} text-gray-700 {% endif %}">
+                                          {{ chat.role | capitalize }}
+                                    </strong>
+                              </div>
+                              <span class="block text-gray-800">{{ chat.content }}</span>
+                              <span class="block text-xs text-gray-500 mt-1">{{ chat.create_at.strftime('%Y-%m-%d
+                                    %H:%M:%S') }}</span>
+                        </div>
+                  </div>
+                  {% endfor %}
+            </div>
+      </div>
+</div>
+{% endblock %}

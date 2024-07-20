@@ -46,6 +46,7 @@
                                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Location</th>
                                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Price</th>
                                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">View</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,6 +57,11 @@
                                     <td class="py-3 px-4">{{ order.location }}</td>
                                     <td class="py-3 px-4">{{ order.price }}</td>
                                     <td class="py-3 px-4">{{ order.status }}</td>
+                                    <td class="py-3 px-4">
+                                        <a href="/admin/call/{{ order.chat_id }}">
+                                            <i class="fas fa-eye text-blue-500"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
